@@ -16,6 +16,7 @@
 package retrofit2;
 
 import java.io.IOException;
+
 import okhttp3.FormBody;
 import okhttp3.Headers;
 import okhttp3.HttpUrl;
@@ -211,9 +212,9 @@ final class RequestBuilder {
     if (contentType != null) {
       if (body != null) {
         body = new ContentTypeOverridingRequestBody(body, contentType);
-      } else {
+      } /*else {
         requestBuilder.addHeader("Content-Type", contentType.toString());
-      }
+      }*/
     }
 
     return requestBuilder
