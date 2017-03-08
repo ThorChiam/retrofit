@@ -28,7 +28,7 @@ import okio.Buffer;
 import retrofit2.Converter;
 
 final class GsonRequestBodyConverter<T> implements Converter<T, RequestBody> {
-  private static final MediaType MEDIA_TYPE = MediaType.parse("application/json; charset=UTF-8");
+  private static final MediaType MEDIA_TYPE = null;
   private static final Charset UTF_8 = Charset.forName("UTF-8");
 
   private final Gson gson;
@@ -45,6 +45,6 @@ final class GsonRequestBodyConverter<T> implements Converter<T, RequestBody> {
     JsonWriter jsonWriter = gson.newJsonWriter(writer);
     adapter.write(jsonWriter, value);
     jsonWriter.close();
-    return RequestBody.create(null, buffer.readByteString());
+    return RequestBody.create(MEDIA_TYPE, buffer.readByteString());
   }
 }
