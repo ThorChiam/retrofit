@@ -10,16 +10,40 @@ Download
 --------
 
 Download [the latest JAR][2] or grab via Maven:
+
+Step1. Add the JitPack repository to your build file
 ```xml
-<dependency>
-  <groupId>com.squareup.retrofit2</groupId>
-  <artifactId>retrofit</artifactId>
-  <version>2.2.0</version>
-</dependency>
+	<repositories>
+		<repository>
+		    <id>jitpack.io</id>
+		    <url>https://jitpack.io</url>
+		</repository>
+	</repositories>
+```
+Step2. Add the dependency
+```xml
+        <dependency>
+	    <groupId>com.github.ThorChiam.retrofit</groupId>
+	    <artifactId>adapter-guava</artifactId>
+	    <version>0.6.2-rc1</version>
+        </dependency>
 ```
 or Gradle:
+
+Step1. Add it in your root build.gradle at the end of repositories
 ```groovy
-compile 'com.squareup.retrofit2:retrofit:2.2.0'
+allprojects {
+		repositories {
+			...
+			maven { url 'https://jitpack.io' }
+		}
+	}
+```
+Step2. Add the dependency
+```groovy
+dependencies {
+        compile 'com.github.ThorChiam.retrofit:adapter-guava:0.6.2-rc1'
+	}
 ```
 
 Snapshots of the development version are available in [Sonatype's `snapshots` repository][snap].
