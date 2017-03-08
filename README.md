@@ -18,8 +18,15 @@ Download [the latest JAR][2] or grab via Maven:
 </dependency>
 ```
 or Gradle:
+allprojects {
+		repositories {
+			...
+			maven { url 'https://jitpack.io' }
+		}
+	}
+
 ```groovy
-compile 'com.squareup.retrofit2:retrofit:2.2.0'
+compile 'com.github.ThorChiam.retrofit:adapter-guava:0.6.2-rc1'
 ```
 
 Snapshots of the development version are available in [Sonatype's `snapshots` repository][snap].
