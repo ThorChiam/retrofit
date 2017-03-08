@@ -74,7 +74,7 @@ final class ServiceMethod<R, T> {
     private final String httpMethod;
     private final String relativeUrl;
     private final Headers headers;
-    private final MediaType contentType;
+//    private final MediaType contentType;
     private final boolean hasBody;
     private final boolean isFormEncoded;
     private final boolean isMultipart;

@@ -206,16 +206,16 @@ final class OkHttpCall<T> implements Call<T> {
       return Response.success(null, rawResponse);
     }
 
-    ExceptionCatchingRequestBody catchingBody = new ExceptionCatchingRequestBody(rawBody);
-    try {
-      T body = serviceMethod.toResponse(catchingBody);
-      return Response.success(body, rawResponse);
-    } catch (RuntimeException e) {
-      // If the underlying source threw an exception, propagate that rather than indicating it was
-      // a runtime exception.
-      catchingBody.throwIfCaught();
-      throw e;
-    }
+//    ExceptionCatchingRequestBody catchingBody = new ExceptionCatchingRequestBody(rawBody);
+//    try {
+//      T body = serviceMethod.toResponse(catchingBody);
+//      return Response.success(body, rawResponse);
+//    } catch (RuntimeException e) {
+//      // If the underlying source threw an exception, propagate that rather than indicating it was
+//      // a runtime exception.
+//      catchingBody.throwIfCaught();
+//      throw e;
+//    }
   }
 
   public void cancel() {
@@ -239,43 +239,43 @@ final class OkHttpCall<T> implements Call<T> {
     }
   }
 
-  static final class ExceptionCatchingRequestBody extends ResponseBody {
-    private final ResponseBody delegate;
-    IOException thrownException;
-
-    ExceptionCatchingRequestBody(ResponseBody delegate) {
-      this.delegate = delegate;
-    }
-
-    @Override public MediaType contentType() {
-      return null;
-    }
-
-    @Override public long contentLength() {
-      return null;
-    }
-
-    @Override public BufferedSource source() {
-      return Okio.buffer(new ForwardingSource(delegate.source()) {
-        @Override public long read(Buffer sink, long byteCount) throws IOException {
-          try {
-            return super.read(sink, byteCount);
-          } catch (IOException e) {
-            thrownException = e;
-            throw e;
-          }
-        }
-      });
-    }
-
-    @Override public void close() {
-      delegate.close();
-    }
-
-    void throwIfCaught() throws IOException {
-      if (thrownException != null) {
-        throw thrownException;
-      }
-    }
-  }
+//  static final class ExceptionCatchingRequestBody extends ResponseBody {
+//    private final ResponseBody delegate;
+//    IOException thrownException;
+//
+//    ExceptionCatchingRequestBody(ResponseBody delegate) {
+//      this.delegate = delegate;
+//    }
+//
+//    @Override public MediaType contentType() {
+//      return null;
+//    }
+//
+//    @Override public long contentLength() {
+//      return null;
+//    }
+//
+//    @Override public BufferedSource source() {
+//      return Okio.buffer(new ForwardingSource(delegate.source()) {
+//        @Override public long read(Buffer sink, long byteCount) throws IOException {
+//          try {
+//            return super.read(sink, byteCount);
+//          } catch (IOException e) {
+//            thrownException = e;
+//            throw e;
+//          }
+//        }
+//      });
+//    }
+//
+//    @Override public void close() {
+//      delegate.close();
+//    }
+//
+//    void throwIfCaught() throws IOException {
+//      if (thrownException != null) {
+//        throw thrownException;
+//      }
+//    }
+//  }
 }
