@@ -207,15 +207,15 @@ final class OkHttpCall<T> implements Call<T> {
     }
 
 //    ExceptionCatchingRequestBody catchingBody = new ExceptionCatchingRequestBody(rawBody);
-//    try {
-//      T body = serviceMethod.toResponse(catchingBody);
-//      return Response.success(body, rawResponse);
-//    } catch (RuntimeException e) {
-//      // If the underlying source threw an exception, propagate that rather than indicating it was
-//      // a runtime exception.
+    try {
+      T body = serviceMethod.toResponse(catchingBody);
+      return Response.success(body, rawResponse);
+    } catch (RuntimeException e) {
+      // If the underlying source threw an exception, propagate that rather than indicating it was
+      // a runtime exception.
 //      catchingBody.throwIfCaught();
-//      throw e;
-//    }
+      throw e;
+    }
   }
 
   public void cancel() {
