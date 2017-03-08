@@ -39,7 +39,7 @@ final class RequestBuilder {
     private HttpUrl.Builder urlBuilder;
 
     private final Request.Builder requestBuilder;
-    private MediaType contentType;
+//    private MediaType contentType;
 
     private final boolean hasBody;
     private MultipartBody.Builder multipartBuilder;
@@ -47,12 +47,12 @@ final class RequestBuilder {
     private RequestBody body;
 
     RequestBuilder(String method, HttpUrl baseUrl, String relativeUrl, Headers headers,
-                   MediaType contentType, boolean hasBody, boolean isFormEncoded, boolean isMultipart) {
+                   boolean hasBody, boolean isFormEncoded, boolean isMultipart) {
         this.method = method;
         this.baseUrl = baseUrl;
         this.relativeUrl = relativeUrl;
         this.requestBuilder = new Request.Builder();
-        this.contentType = contentType;
+//        this.contentType = contentType;
         this.hasBody = hasBody;
 
         if (headers != null) {
@@ -223,28 +223,28 @@ final class RequestBuilder {
                 .build();
     }
 
-    private static class ContentTypeOverridingRequestBody extends RequestBody {
-        private final RequestBody delegate;
-        private final MediaType contentType;
-
-        ContentTypeOverridingRequestBody(RequestBody delegate, MediaType contentType) {
-            this.delegate = delegate;
-            this.contentType = contentType;
-        }
-
-        @Override
-        public MediaType contentType() {
-            return contentType;
-        }
-
-        @Override
-        public long contentLength() throws IOException {
-            return delegate.contentLength();
-        }
-
-        @Override
-        public void writeTo(BufferedSink sink) throws IOException {
-            delegate.writeTo(sink);
-        }
-    }
+//    private static class ContentTypeOverridingRequestBody extends RequestBody {
+//        private final RequestBody delegate;
+//        private final MediaType contentType;
+//
+//        ContentTypeOverridingRequestBody(RequestBody delegate, MediaType contentType) {
+//            this.delegate = delegate;
+//            this.contentType = contentType;
+//        }
+//
+//        @Override
+//        public MediaType contentType() {
+//            return contentType;
+//        }
+//
+//        @Override
+//        public long contentLength() throws IOException {
+//            return delegate.contentLength();
+//        }
+//
+//        @Override
+//        public void writeTo(BufferedSink sink) throws IOException {
+//            delegate.writeTo(sink);
+//        }
+//    }
 }

@@ -188,7 +188,6 @@ final class OkHttpCall<T> implements Call<T> {
 
     // Remove the body's source (the only stateful object) so we can pass the response along.
     rawResponse = rawResponse.newBuilder()
-        .body(new NoContentResponseBody(rawBody.contentType(), rawBody.contentLength()))
         .build();
 
     int code = rawResponse.code();
@@ -240,28 +239,6 @@ final class OkHttpCall<T> implements Call<T> {
     }
   }
 
-  static final class NoContentResponseBody extends ResponseBody {
-    private final MediaType contentType;
-    private final long contentLength;
-
-    NoContentResponseBody(MediaType contentType, long contentLength) {
-      this.contentType = contentType;
-      this.contentLength = contentLength;
-    }
-
-    @Override public MediaType contentType() {
-      return contentType;
-    }
-
-    @Override public long contentLength() {
-      return contentLength;
-    }
-
-    @Override public BufferedSource source() {
-      throw new IllegalStateException("Cannot read raw response body of a converted body.");
-    }
-  }
-
   static final class ExceptionCatchingRequestBody extends ResponseBody {
     private final ResponseBody delegate;
     IOException thrownException;
@@ -271,11 +248,11 @@ final class OkHttpCall<T> implements Call<T> {
     }
 
     @Override public MediaType contentType() {
-      return delegate.contentType();
+      return null;
     }
 
     @Override public long contentLength() {
-      return delegate.contentLength();
+      return null;
     }
 
     @Override public BufferedSource source() {

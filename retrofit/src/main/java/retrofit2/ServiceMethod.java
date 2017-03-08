@@ -88,7 +88,7 @@ final class ServiceMethod<R, T> {
         this.httpMethod = builder.httpMethod;
         this.relativeUrl = builder.relativeUrl;
         this.headers = builder.headers;
-        this.contentType = builder.contentType;
+//        this.contentType = builder.contentType;
         this.hasBody = builder.hasBody;
         this.isFormEncoded = builder.isFormEncoded;
         this.isMultipart = builder.isMultipart;
@@ -99,8 +99,7 @@ final class ServiceMethod<R, T> {
      * Builds an HTTP request from method arguments.
      */
     Request toRequest(Object... args) throws IOException {
-        RequestBuilder requestBuilder = new RequestBuilder(httpMethod, baseUrl, relativeUrl, headers,
-                contentType, hasBody, isFormEncoded, isMultipart);
+        RequestBuilder requestBuilder = new RequestBuilder(httpMethod, baseUrl, relativeUrl, headers, hasBody, isFormEncoded, isMultipart);
 
         @SuppressWarnings("unchecked") // It is an error to invoke a method with the wrong arg types.
                 ParameterHandler<Object>[] handlers = (ParameterHandler<Object>[]) parameterHandlers;
@@ -150,7 +149,6 @@ final class ServiceMethod<R, T> {
         boolean isMultipart;
         String relativeUrl;
         Headers headers;
-        MediaType contentType;
         Set<String> relativeUrlParamNames;
         ParameterHandler<?>[] parameterHandlers;
         Converter<ResponseBody, T> responseConverter;
@@ -322,15 +320,15 @@ final class ServiceMethod<R, T> {
                 }
                 String headerName = header.substring(0, colon);
                 String headerValue = header.substring(colon + 1).trim();
-                if ("Content-Type".equalsIgnoreCase(headerName)) {
+                /*if ("Content-Type".equalsIgnoreCase(headerName)) {
                     MediaType type = MediaType.parse(headerValue);
                     if (type == null) {
                         throw methodError("Malformed content type: %s", headerValue);
                     }
                     contentType = type;
-                } else {
+                } else {*/
                     builder.add(headerName, headerValue);
-                }
+//                }
             }
             return builder.build();
         }
