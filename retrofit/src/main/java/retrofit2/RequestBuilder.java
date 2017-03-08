@@ -208,13 +208,13 @@ final class RequestBuilder {
     }
 
     MediaType contentType = this.contentType;
-    if (contentType != null) {
+    /*if (contentType != null) {
       if (body != null) {
         body = new ContentTypeOverridingRequestBody(body, contentType);
       } else {
         requestBuilder.addHeader("Content-Type", contentType.toString());
       }
-    }
+    }*/
 
     return requestBuilder
         .url(url)
